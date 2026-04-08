@@ -65,9 +65,7 @@ export default function SettingsPage() {
       return;
     }
 
-    if (!result.success) {
-      setTestStatus({ state: 'error', message: `✗ Failed: ${result.error}` });
-    }
+    setTestStatus({ state: 'error', message: `✗ Failed: ${(result as { success: false; error: string }).error}` });
   };
 
   const addSuppression = () => {
