@@ -285,12 +285,12 @@ export default function SendPage() {
                     onClick={markSent}
                     disabled={!session.complianceAcknowledged}
                   >
-                    <Check className="mr-1 h-4 w-4" /> Mark Sent
+                    <Check className="mr-1 h-4 w-4" /> Mark Sent <kbd className="ml-1.5 text-[10px] opacity-50 border border-current/20 rounded px-1">Enter</kbd>
                   </Button>
 
                   {!showSkipInput ? (
                     <Button variant="outline" onClick={() => setShowSkipInput(true)}>
-                      <SkipForward className="mr-1 h-4 w-4" /> Skip
+                      <SkipForward className="mr-1 h-4 w-4" /> Skip <kbd className="ml-1.5 text-[10px] opacity-50 border border-current/20 rounded px-1">S</kbd>
                     </Button>
                   ) : (
                     <div className="flex items-center gap-2">
