@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clipboard, Check, SkipForward, Undo2, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -97,6 +97,43 @@ export default function SendPage() {
     setNote('');
   }, [session, updateSession]);
 
+  // Keyboard shortcuts — use ref to access latest callbacks without breaking hook rules
+  const actionsRef = useRef<{ markSent: () => void; markSkipped: () => void; copyNumber: () => void; copyMessage: () => void } | null>(null);
+
+  useEffect(() => {
+    if (!session || session.status === 'completed') return;
+
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement).tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (!actionsRef.current) return;
+
+      const currentR = session.recipients[session.currentIndex];
+      if (!currentR || currentR.sendStatus !== 'pending') return;
+
+      if (e.key === 'Enter' && session.complianceAcknowledged) {
+        e.preventDefault();
+        actionsRef.current.markSent();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        if (showSkipInput) {
+          actionsRef.current.markSkipped();
+        } else {
+          setShowSkipInput(true);
+        }
+      } else if (e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        actionsRef.current.copyNumber();
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        actionsRef.current.copyMessage();
+      }
+    };
+
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [session, showSkipInput]);
+
   if (!session) return null;
 
   const currentRecipient = session.recipients[session.currentIndex];
@@ -130,6 +167,14 @@ export default function SendPage() {
   const pauseSession = () => {
     updateSession({ status: 'paused' });
     navigate('/upload');
+  };
+
+  // Keep ref in sync for keyboard shortcuts
+  actionsRef.current = {
+    markSent,
+    markSkipped,
+    copyNumber: () => currentRecipient && copyToClipboard(currentRecipient.mobileForCopy, 'number'),
+    copyMessage: () => currentRecipient && copyToClipboard(currentRecipient.renderedMessage, 'message'),
   };
 
   if (isComplete || session.status === 'completed') {
@@ -205,7 +250,7 @@ export default function SendPage() {
                   {copiedField === 'number' ? (
                     <><Check className="mr-2 h-5 w-5" /> Copied!</>
                   ) : (
-                    <><Clipboard className="mr-2 h-5 w-5" /> Copy Number</>
+                    <><Clipboard className="mr-2 h-5 w-5" /> Copy Number <kbd className="ml-1.5 text-[10px] opacity-50 border border-current/20 rounded px-1">N</kbd></>
                   )}
                 </Button>
                 <Button
@@ -216,7 +261,7 @@ export default function SendPage() {
                   {copiedField === 'message' ? (
                     <><Check className="mr-2 h-5 w-5" /> Copied!</>
                   ) : (
-                    <><Clipboard className="mr-2 h-5 w-5" /> Copy Message</>
+                    <><Clipboard className="mr-2 h-5 w-5" /> Copy Message <kbd className="ml-1.5 text-[10px] opacity-50 border border-current/20 rounded px-1">M</kbd></>
                   )}
                 </Button>
               </div>
@@ -240,12 +285,12 @@ export default function SendPage() {
                     onClick={markSent}
                     disabled={!session.complianceAcknowledged}
                   >
-                    <Check className="mr-1 h-4 w-4" /> Mark Sent
+                    <Check className="mr-1 h-4 w-4" /> Mark Sent <kbd className="ml-1.5 text-[10px] opacity-50 border border-current/20 rounded px-1">Enter</kbd>
                   </Button>
 
                   {!showSkipInput ? (
                     <Button variant="outline" onClick={() => setShowSkipInput(true)}>
-                      <SkipForward className="mr-1 h-4 w-4" /> Skip
+                      <SkipForward className="mr-1 h-4 w-4" /> Skip <kbd className="ml-1.5 text-[10px] opacity-50 border border-current/20 rounded px-1">S</kbd>
                     </Button>
                   ) : (
                     <div className="flex items-center gap-2">
