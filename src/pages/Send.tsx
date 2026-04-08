@@ -97,39 +97,6 @@ export default function SendPage() {
     setNote('');
   }, [session, updateSession]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    if (!session || session.status === 'completed') return;
-    const currentR = session.recipients[session.currentIndex];
-    if (!currentR || currentR.sendStatus !== 'pending') return;
-
-    const handler = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-
-      if (e.key === 'Enter' && session.complianceAcknowledged) {
-        e.preventDefault();
-        markSent();
-      } else if (e.key === 's' || e.key === 'S') {
-        e.preventDefault();
-        if (showSkipInput) {
-          markSkipped();
-        } else {
-          setShowSkipInput(true);
-        }
-      } else if (e.key === 'n' || e.key === 'N') {
-        e.preventDefault();
-        copyToClipboard(currentR.mobileForCopy, 'number');
-      } else if (e.key === 'm' || e.key === 'M') {
-        e.preventDefault();
-        copyToClipboard(currentR.renderedMessage, 'message');
-      }
-    };
-
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  });
-
   if (!session) return null;
 
   const currentRecipient = session.recipients[session.currentIndex];
