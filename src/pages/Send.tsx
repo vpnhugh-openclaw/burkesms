@@ -140,7 +140,7 @@ export default function SendPage() {
 
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [session, showSkipInput]);
+  }, [session, showSkipInput, fallbackText]);
 
   if (!session) return null;
 
