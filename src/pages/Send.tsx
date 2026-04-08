@@ -64,27 +64,23 @@ export default function SendPage() {
   }, []);
 
   const session = activeSession;
-  if (!session) return null;
-
-  const currentRecipient = session.recipients[session.currentIndex];
-  const sentCount = session.recipients.filter(r => r.sendStatus === 'sent').length;
-  const skippedCount = session.recipients.filter(r => r.sendStatus === 'skipped').length;
-  const pendingCount = session.recipients.filter(r => r.sendStatus === 'pending').length;
-  const isComplete = pendingCount === 0;
 
   const updateSession = useCallback((updates: Partial<SendSession>) => {
+    if (!session) return;
     const updated = { ...session, ...updates, updatedAt: new Date().toISOString() };
     setActiveSession(updated);
     saveSession(updated);
   }, [session, setActiveSession]);
 
   const updateRecipient = useCallback((index: number, updates: Partial<SendSessionRecipient>) => {
+    if (!session) return;
     const newRecipients = [...session.recipients];
     newRecipients[index] = { ...newRecipients[index], ...updates };
     updateSession({ recipients: newRecipients });
   }, [session, updateSession]);
 
   const advanceToNextPending = useCallback(() => {
+    if (!session) return;
     const nextIndex = session.recipients.findIndex((r, i) => i > session.currentIndex && r.sendStatus === 'pending');
     if (nextIndex >= 0) {
       updateSession({ currentIndex: nextIndex });
@@ -100,6 +96,14 @@ export default function SendPage() {
     setSkipReason('');
     setNote('');
   }, [session, updateSession]);
+
+  if (!session) return null;
+
+  const currentRecipient = session.recipients[session.currentIndex];
+  const sentCount = session.recipients.filter(r => r.sendStatus === 'sent').length;
+  const skippedCount = session.recipients.filter(r => r.sendStatus === 'skipped').length;
+  const pendingCount = session.recipients.filter(r => r.sendStatus === 'pending').length;
+  const isComplete = pendingCount === 0;
 
   const copyToClipboard = async (text: string, field: 'number' | 'message') => {
     try {
