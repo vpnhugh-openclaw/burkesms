@@ -97,6 +97,43 @@ export default function SendPage() {
     setNote('');
   }, [session, updateSession]);
 
+  // Keyboard shortcuts — use ref to access latest callbacks without breaking hook rules
+  const actionsRef = useRef<{ markSent: () => void; markSkipped: () => void; copyNumber: () => void; copyMessage: () => void } | null>(null);
+
+  useEffect(() => {
+    if (!session || session.status === 'completed') return;
+
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement).tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (!actionsRef.current) return;
+
+      const currentR = session.recipients[session.currentIndex];
+      if (!currentR || currentR.sendStatus !== 'pending') return;
+
+      if (e.key === 'Enter' && session.complianceAcknowledged) {
+        e.preventDefault();
+        actionsRef.current.markSent();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        if (showSkipInput) {
+          actionsRef.current.markSkipped();
+        } else {
+          setShowSkipInput(true);
+        }
+      } else if (e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        actionsRef.current.copyNumber();
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        actionsRef.current.copyMessage();
+      }
+    };
+
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [session, showSkipInput]);
+
   if (!session) return null;
 
   const currentRecipient = session.recipients[session.currentIndex];
