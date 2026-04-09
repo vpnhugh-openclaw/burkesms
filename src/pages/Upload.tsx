@@ -111,9 +111,9 @@ export default function UploadPage() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
             <p className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Upload and prepare</p>
-            <h1 className="mt-4 text-white">Load your patient list and run outreach with calm, pharmacy-grade clarity.</h1>
+            <h1 className="mt-4 text-white">Patient List Messager</h1>
             <p className="mt-4 max-w-2xl text-lg text-[#dbe7e3]">
-              Import the spreadsheet, review the queue, and keep every patient touchpoint organised before messages go out.
+              Import the spreadsheet, and review each message before it goes out.
             </p>
           </div>
           <div className="flex items-center gap-4 self-start rounded-[24px] border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
@@ -133,7 +133,7 @@ export default function UploadPage() {
         <div className="frost-panel flex items-start justify-between gap-4 border border-[#d9e5e0] bg-[#f4f8f6] p-4">
           <button type="button" className="min-w-0 text-left" onClick={() => setShowSetupGuide(true)}>
             <p className="text-sm font-medium text-[#1f2a28]">Want to send texts directly without copy-pasting?</p>
-            <p className="mt-1 text-sm text-[#5e6b67]">Set up direct sending in 3 steps. Show me how →</p>
+            <p className="mt-1 text-sm text-[#5e6b67]">Set up direct sending through httpSMS.com in 3 steps. Show me how →</p>
           </button>
           <button
             type="button"
@@ -182,7 +182,7 @@ export default function UploadPage() {
           }}
         >
           <Upload className="mx-auto mb-6 h-14 w-14 text-[#1f5d57]" />
-          <h2>Drop your patient spreadsheet here</h2>
+          <h2>Drop the patient spreadsheet here</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
             Blackshaws format, message in rows 1 to 2, headers in row 3, patients from row 4.
           </p>
