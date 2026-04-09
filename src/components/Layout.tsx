@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div>
               <Link to="/upload" className="font-display text-2xl text-foreground sm:text-3xl">
-                Burke Text Messager
+                Burke Text Messenger
               </Link>
               <p className="mt-1 text-sm text-muted-foreground">Burke Road Compounding Pharmacy patient outreach and SMS workflow tracking.</p>
             </div>
