@@ -445,7 +445,7 @@ export default function SendPage() {
     });
 
     if (!result.success) {
-      toast({ title: 'SMS not sent', description: result.error, variant: 'destructive' });
+      toast({ title: 'SMS not sent', description: 'error' in result ? result.error : 'Unknown error', variant: 'destructive' });
       appendSendLog({
         timestamp: new Date().toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit' }),
         maskedPhone: `••••${to.slice(-4)}`,
