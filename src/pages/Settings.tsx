@@ -99,17 +99,17 @@ export default function SettingsPage() {
   return (
     <div className="space-y-8">
       <section className="max-w-4xl space-y-4">
-        <p className="frost-pill text-[#3b9eff]">Configuration</p>
-        <h1>Configure your delivery settings without leaving the workflow.</h1>
+        <p className="frost-pill">Configuration</p>
+        <h1>Configure delivery settings with the same calm, clinical clarity as the rest of the workflow.</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          Keep your pharmacy details, direct-send gateway, and safeguards in one place. Sensitive values stay masked unless you choose to reveal them.
+          Keep pharmacy details, direct-send gateway settings, and patient safeguards in one place. Sensitive values stay masked unless you choose to reveal them.
         </p>
       </section>
 
       <section className="frost-panel space-y-5 p-6">
         <div className="flex items-center gap-3">
-          <div className="rounded-full border border-white/10 bg-white/[0.04] p-2">
-            <ShieldCheck className="h-5 w-5 text-[#3b9eff]" />
+          <div className="rounded-full border border-[#d9e5e0] bg-[#f4f8f6] p-2">
+            <ShieldCheck className="h-5 w-5 text-[#1f5d57]" />
           </div>
           <div>
             <h2>httpSMS</h2>
@@ -118,19 +118,19 @@ export default function SettingsPage() {
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          <div className="md:col-span-2 rounded-3xl border border-[#f59e0b]/25 bg-[#f59e0b]/10 p-4 text-sm text-[#fde68a]">
+          <div className="md:col-span-2 rounded-3xl border border-[#d4a017]/20 bg-[#f8f1d9] p-4 text-sm text-[#6f4d1f]">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#fbbf24]" />
+              <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#b7791f]" />
               <div className="space-y-2">
-                <p className="font-medium text-[#fef3c7]">Use the account API key, not a phone API key.</p>
+                <p className="font-medium text-[#5f4315]">Use the account API key, not a phone API key.</p>
                 <p>
-                  The key for this form must come from <span className="font-semibold text-white">httpsms.com/settings</span>. The phone API key page is only for logging the Android app in.
+                  The key for this form must come from <span className="font-semibold text-[#1f2a28]">httpsms.com/settings</span>. The phone API key page is only for logging the Android app in.
                 </p>
                 <p>
-                  The Android app should be signed into the <span className="font-semibold text-white">same httpSMS account</span> that owns the API key you paste here, and the phone number below must be that same Android handset.
+                  The Android app should be signed into the <span className="font-semibold text-[#1f2a28]">same httpSMS account</span> that owns the API key you paste here, and the phone number below must be that same Android handset.
                 </p>
                 {hasLikelyPhoneApiKey ? (
-                  <p className="font-medium text-[#fca5a5]">This key looks like it might be a phone API key. Please copy the account API key from Settings instead.</p>
+                  <p className="font-medium text-[#b42318]">This key looks like it might be a phone API key. Please copy the account API key from Settings instead.</p>
                 ) : null}
               </div>
             </div>
@@ -150,12 +150,12 @@ export default function SettingsPage() {
                 }}
                 onBlur={() => setApiKey((current) => sanitiseApiKey(current))}
               />
-              <Button data-testid="settings-toggle-api-key" variant="outline" size="icon" type="button" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => setShowApiKey((value) => !value)}>
+              <Button data-testid="settings-toggle-api-key" variant="outline" size="icon" type="button" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => setShowApiKey((value) => !value)}>
                 {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">Get your key from httpsms.com/settings</p>
-            <button type="button" className="text-sm font-medium text-[#93c5fd] transition hover:text-white" onClick={() => setShowSetupGuide(true)}>
+            <button type="button" className="text-sm font-medium text-[#1f5d57] transition hover:text-[#174740]" onClick={() => setShowSetupGuide(true)}>
               How to set this up →
             </button>
           </div>
@@ -175,7 +175,7 @@ export default function SettingsPage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">Connection test</label>
-            <Button data-testid="settings-test-connection" variant="outline" className="w-full rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void handleTestConnection()} disabled={testStatus.state === 'loading' || !canAttemptTest}>
+            <Button data-testid="settings-test-connection" variant="outline" className="w-full rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void handleTestConnection()} disabled={testStatus.state === 'loading' || !canAttemptTest}>
               {testStatus.state === 'loading' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               Test Connection
             </Button>
@@ -184,12 +184,12 @@ export default function SettingsPage() {
             )}
             {testStatus.state !== 'idle' && (
               <div className="space-y-3">
-                <p className={`text-sm ${testStatus.state === 'success' ? 'text-[#11ff99]' : testStatus.state === 'error' ? 'text-[#ff8aa0]' : 'text-muted-foreground'}`}>
+                <p className={`text-sm ${testStatus.state === 'success' ? 'text-[#1d7a43]' : testStatus.state === 'error' ? 'text-[#b42318]' : 'text-muted-foreground'}`}>
                   {testStatus.message}
                 </p>
                 {testStatus.state === 'error' && (
-                  <div className="rounded-2xl border border-[#ff8aa0]/20 bg-[#ff8aa0]/5 p-3 text-xs text-[#ffd5de]">
-                    <p className="font-medium text-white">Common fixes</p>
+                  <div className="rounded-2xl border border-[#b42318]/15 bg-[#fff1f0] p-3 text-xs text-[#7a271a]">
+                    <p className="font-medium text-[#5f1d14]">Common fixes</p>
                     <ul className="mt-2 ml-4 list-disc space-y-1">
                       <li>Re-copy the account API key from httpsms.com/settings</li>
                       <li>Do not use a phone API key from the phone API keys page</li>
@@ -246,7 +246,7 @@ export default function SettingsPage() {
           ) : (
             <div className="space-y-2">
               {savedTemplates.map((template) => (
-                <div key={template.id} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <div key={template.id} className="rounded-2xl border border-[#e7eeea] bg-[#fcfcfa] p-4">
                   <div className="flex items-start gap-3">
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium text-foreground">{template.name}</p>
@@ -267,7 +267,7 @@ export default function SettingsPage() {
           <div className="flex flex-col gap-2 sm:flex-row">
             <Input placeholder="Mobile number" value={suppMobile} onChange={(e) => setSuppMobile(e.target.value)} className="flex-1" />
             <Input placeholder="Reason" value={suppReason} onChange={(e) => setSuppReason(e.target.value)} className="flex-1" />
-            <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={addSuppression}>
+            <Button variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={addSuppression}>
               <Plus className="h-4 w-4" />
             </Button>
           </div>
@@ -275,7 +275,7 @@ export default function SettingsPage() {
             <div className="table-shell">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-white/10 bg-white/[0.03] text-muted-foreground">
+                  <tr className="border-b border-[#d9e5e0] bg-[#f4f8f6] text-muted-foreground">
                     <th className="px-4 py-3 text-left font-medium">Mobile</th>
                     <th className="px-4 py-3 text-left font-medium">Reason</th>
                     <th className="px-4 py-3 text-left font-medium">Added</th>
@@ -284,7 +284,7 @@ export default function SettingsPage() {
                 </thead>
                 <tbody>
                   {settings.suppressionList.map((entry) => (
-                    <tr key={entry.mobile} className="border-b border-white/10 last:border-0">
+                    <tr key={entry.mobile} className="border-b border-[#eef3f0] last:border-0">
                       <td className="px-4 py-3 font-mono text-muted-foreground">{entry.mobile}</td>
                       <td className="px-4 py-3">{entry.reason}</td>
                       <td className="px-4 py-3 text-muted-foreground">{new Date(entry.addedAt).toLocaleDateString('en-AU')}</td>

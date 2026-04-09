@@ -49,7 +49,7 @@ interface HttpSmsSetupGuideProps {
 export default function HttpSmsSetupGuide({ open, onOpenChange, onOpenSettings }: HttpSmsSetupGuideProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] w-[calc(100vw-1.5rem)] max-w-2xl overflow-y-auto rounded-3xl border border-white/10 bg-[#07111f] p-0 text-left shadow-2xl sm:w-full">
+      <DialogContent className="max-h-[90vh] w-[calc(100vw-1.5rem)] max-w-2xl overflow-y-auto rounded-3xl border border-[#d9e5e0] bg-[#fcfcfa] p-0 text-left shadow-2xl sm:w-full">
         <div className="p-6 sm:p-7">
           <DialogHeader className="text-left">
             <DialogTitle className="text-2xl text-foreground">Send texts directly from this app</DialogTitle>
@@ -60,9 +60,9 @@ export default function HttpSmsSetupGuide({ open, onOpenChange, onOpenSettings }
 
           <div className="mt-6 space-y-4">
             {steps.map((step) => (
-              <section key={step.number} className="rounded-3xl border border-white/10 bg-white/[0.04] p-4 sm:p-5">
+              <section key={step.number} className="rounded-3xl border border-[#e7eeea] bg-[#f9fbfa] p-4 sm:p-5">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1d4ed8] text-sm font-semibold text-white">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1f5d57] text-sm font-semibold text-white">
                     {step.number}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -74,12 +74,12 @@ export default function HttpSmsSetupGuide({ open, onOpenChange, onOpenSettings }
                           href={step.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition hover:bg-white/90"
+                          className="inline-flex items-center gap-2 rounded-full bg-[#1f5d57] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#174740]"
                         >
                           <span>{step.actionLabel}</span>
                           <ExternalLink className="h-4 w-4" />
                         </a>
-                        {'note' in step && step.note ? <p className="mt-2 text-xs text-slate-400">{step.note}</p> : null}
+                        {'note' in step && step.note ? <p className="mt-2 text-xs text-[#5e6b67]">{step.note}</p> : null}
                       </div>
                     ) : (
                       <div className="mt-4">
@@ -94,12 +94,12 @@ export default function HttpSmsSetupGuide({ open, onOpenChange, onOpenSettings }
             ))}
           </div>
 
-          <div className="mt-6 rounded-3xl bg-[#dbeafe] p-4 text-sm leading-6 text-[#1e3a8a]">
+          <div className="mt-6 rounded-3xl bg-[#eaf5f1] p-4 text-sm leading-6 text-[#174740]">
             ✅ Once set up, the 'Send SMS Directly' button will send the message straight to the patient's phone through your Android handset, no copy-pasting, no screen switching, no manual steps.
           </div>
 
-          <DialogFooter className="mt-6 items-start gap-3 border-t border-white/10 pt-5 sm:items-center sm:justify-between sm:space-x-0">
-            <Button type="button" variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => onOpenChange(false)}>
+          <DialogFooter className="mt-6 items-start gap-3 border-t border-[#e7eeea] pt-5 sm:items-center sm:justify-between sm:space-x-0">
+            <Button type="button" variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => onOpenChange(false)}>
               Close
             </Button>
             <p className="text-xs text-muted-foreground">Need help? Visit httpsms.com or ask your manager.</p>

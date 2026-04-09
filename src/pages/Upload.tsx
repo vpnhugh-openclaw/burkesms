@@ -201,10 +201,10 @@ export default function UploadPage() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <StatChip icon={CheckCircle} iconClass="text-[#11ff99]" label="Valid" value={parseResult.stats.valid} />
+            <StatChip icon={CheckCircle} iconClass="text-[#1d7a43]" label="Valid" value={parseResult.stats.valid} />
             <StatChip icon={XCircle} iconClass="text-muted-foreground" label="Already texted" value={parseResult.stats.alreadyTexted} />
-            <StatChip icon={AlertTriangle} iconClass="text-[#ffc53d]" label="Duplicates" value={parseResult.stats.duplicates} />
-            <StatChip icon={XCircle} iconClass="text-[#ff2047]" label="Invalid" value={parseResult.stats.invalid} />
+            <StatChip icon={AlertTriangle} iconClass="text-[#9b6829]" label="Duplicates" value={parseResult.stats.duplicates} />
+            <StatChip icon={XCircle} iconClass="text-[#b42318]" label="Invalid" value={parseResult.stats.invalid} />
           </div>
 
           <div className="frost-panel p-5">

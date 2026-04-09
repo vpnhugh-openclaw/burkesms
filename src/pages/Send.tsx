@@ -481,25 +481,25 @@ export default function SendPage() {
     return (
       <div className="mx-auto max-w-4xl space-y-8 py-12">
         <section className="text-center">
-          <p className="frost-pill text-[#11ff99]">Session summary</p>
+          <p className="frost-pill">Session summary</p>
           <h1 className="mt-4">{isComplete ? 'Session complete.' : 'Session snapshot.'}</h1>
           <p className="mt-4 text-muted-foreground">{sentCount} sent · {skippedCount} skipped · {pendingCount} pending</p>
         </section>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <SummaryStat label="Sent" value={sentCount} className="text-[#11ff99]" />
-          <SummaryStat label="Skipped" value={skippedCount} className="text-[#ffc53d]" />
+          <SummaryStat label="Sent" value={sentCount} className="text-[#1d7a43]" />
+          <SummaryStat label="Skipped" value={skippedCount} className="text-[#9b6829]" />
           <SummaryStat label="Pending" value={pendingCount} className="text-muted-foreground" />
         </div>
 
         {skippedCount > 0 && (
-          <div className="frost-panel border-[#ffc53d]/20 bg-[#ffc53d]/5 p-5">
+          <div className="frost-panel border-[#d4a017]/20 bg-[#f8f1d9] p-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3>Skipped patients</h3>
                 <p className="mt-1 text-sm text-muted-foreground">Review and return to these patients if needed.</p>
               </div>
-              <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => { setQueueFilter('skipped'); setShowSessionSummary(false); }}>
+              <Button variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => { setQueueFilter('skipped'); setShowSessionSummary(false); }}>
                 <Filter className="mr-2 h-4 w-4" /> Review skipped
               </Button>
             </div>
@@ -508,20 +508,20 @@ export default function SendPage() {
 
         <div className="flex flex-wrap justify-center gap-3">
           {lastAction && (
-            <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void undoLastAction()}>
+            <Button variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void undoLastAction()}>
               <Undo2 className="mr-2 h-4 w-4" /> Undo last
             </Button>
           )}
           {pendingCount > 0 && (
-            <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => setShowSessionSummary(false)}>
+            <Button variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => setShowSessionSummary(false)}>
               Return to session
             </Button>
           )}
-          <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void restartSession()}>
+          <Button variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void restartSession()}>
             <RotateCcw className="mr-2 h-4 w-4" /> Restart session
           </Button>
           <Button className="rounded-full" onClick={() => navigate('/results')}>View full results</Button>
-          <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void finishAndReturnToUpload()}>
+          <Button variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void finishAndReturnToUpload()}>
             Send another batch
           </Button>
         </div>
@@ -532,7 +532,7 @@ export default function SendPage() {
   return (
     <div className="space-y-6 pb-40">
       <section className="max-w-4xl space-y-4">
-        <p className="frost-pill text-[#ffa057]">Send workflow</p>
+        <p className="frost-pill">Send workflow</p>
         <h1>Move through each patient with a clean queue and direct send controls.</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
           Copy manually into Messages or send directly through httpSMS, then keep the session state accurate as you go.
@@ -540,7 +540,7 @@ export default function SendPage() {
       </section>
 
       {showInstructions && (
-        <div data-testid="send-instructions" className="frost-panel border-[#3b9eff]/20 bg-[#3b9eff]/5 p-5 text-sm">
+        <div data-testid="send-instructions" className="frost-panel border-[#d9e5e0] bg-[#f4f8f6] p-5 text-sm">
           <p className="font-medium text-foreground">How to send each message</p>
           <p className="mt-2 text-muted-foreground">Keep this tab open alongside <strong>messages.google.com</strong> in another tab.</p>
           <ol className="mt-3 ml-4 list-decimal space-y-1 text-muted-foreground">
@@ -549,7 +549,7 @@ export default function SendPage() {
             <li>Return here and tap <strong>Mark Sent & Next</strong>.</li>
           </ol>
           <button
-            className="mt-4 text-sm font-medium text-[#3b9eff] hover:underline"
+            className="mt-4 text-sm font-medium text-[#1f5d57] hover:underline"
             onClick={() => {
               setShowInstructions(false);
               localStorage.setItem('hughs-instructions-dismissed', 'true');
@@ -569,10 +569,10 @@ export default function SendPage() {
           <div className="frost-pill text-muted-foreground">Patient {session.currentIndex + 1} of {totalCount}</div>
         </div>
 
-        <div className="mt-5 flex h-3 overflow-hidden rounded-full bg-white/10">
-          <div className="h-full bg-[#11ff99] transition-all" style={{ width: `${(sentCount / totalCount) * 100}%` }} />
-          <div className="h-full bg-[#ffc53d] transition-all" style={{ width: `${(skippedCount / totalCount) * 100}%` }} />
-          <div className="h-full bg-white/15 transition-all" style={{ width: `${(pendingCount / totalCount) * 100}%` }} />
+        <div className="mt-5 flex h-3 overflow-hidden rounded-full bg-[#e7eeea]">
+          <div className="h-full bg-[#1d7a43] transition-all" style={{ width: `${(sentCount / totalCount) * 100}%` }} />
+          <div className="h-full bg-[#b7791f] transition-all" style={{ width: `${(skippedCount / totalCount) * 100}%` }} />
+          <div className="h-full bg-[#b8c7c1] transition-all" style={{ width: `${(pendingCount / totalCount) * 100}%` }} />
         </div>
       </div>
 
@@ -582,7 +582,7 @@ export default function SendPage() {
             <div data-testid="send-current-patient" className="frost-panel p-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#3b9eff]">Current patient</p>
+                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#1f5d57]">Current patient</p>
                   <p className="mt-2 text-xs text-muted-foreground">Row {currentRecipient.originalRowNumber}</p>
                   <h2 className="mt-2">{currentRecipient.firstName} {currentRecipient.lastName}</h2>
                   <p className="mt-2 font-mono text-muted-foreground">{currentRecipient.mobileDisplay}</p>
@@ -592,15 +592,15 @@ export default function SendPage() {
                     currentRecipient.sendStatus === 'pending'
                       ? 'text-muted-foreground'
                       : currentRecipient.sendStatus === 'sent'
-                        ? 'bg-[#11ff99]/10 text-[#11ff99]'
-                        : 'bg-[#ffc53d]/10 text-[#ffc53d]'
+                        ? 'bg-[#eaf5f1] text-[#1d7a43]'
+                        : 'bg-[#f8f1d9] text-[#9b6829]'
                   }`}
                 >
                   {currentRecipient.sendStatus === 'pending' ? 'Pending' : currentRecipient.sendStatus === 'sent' ? 'Sent' : 'Skipped'}
                 </div>
               </div>
 
-              <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+              <div className="mt-6 rounded-3xl border border-[#e7eeea] bg-[#fcfcfa] p-5">
                 <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Message preview</p>
                 <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-foreground">{currentRecipient.renderedMessage}</p>
               </div>
@@ -612,11 +612,11 @@ export default function SendPage() {
                   type="tel"
                   value={currentPatientPhone}
                   placeholder="e.g. 0412 345 678"
-                  className={!currentPatientPhoneValid ? 'border-[#ff2047] focus-visible:ring-[#ff2047]' : ''}
+                  className={!currentPatientPhoneValid ? 'border-[#b42318] focus-visible:ring-[#b42318]' : ''}
                   onChange={(e) => void updateCurrentRecipient({ patientPhoneInput: e.target.value })}
                   onBlur={() => void handlePatientPhoneBlur()}
                 />
-                {!currentPatientPhoneValid && <p className="text-sm text-[#ff8aa0]">Please enter a valid Australian mobile number</p>}
+                {!currentPatientPhoneValid && <p className="text-sm text-[#b42318]">Please enter a valid Australian mobile number</p>}
               </div>
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -633,7 +633,7 @@ export default function SendPage() {
                   data-testid="send-sms-button"
                   aria-label="Send SMS Directly"
                   variant="secondary"
-                  className={`h-[48px] w-full rounded-full border text-base font-medium ${sendState.status === 'sending' || !httpSmsConfigured ? 'border-white/10 bg-white/5 text-muted-foreground hover:bg-white/5' : 'border-[#16a34a] bg-[#16a34a] text-white hover:bg-[#15803d]'}`}
+                  className={`h-[48px] w-full rounded-full border text-base font-medium ${sendState.status === 'sending' || !httpSmsConfigured ? 'border-[#d9e5e0] bg-[#f4f8f6] text-muted-foreground hover:bg-[#f4f8f6]' : 'border-[#1d7a43] bg-[#1d7a43] text-white hover:bg-[#176236]'}`}
                   onClick={() => void handleSendSms()}
                   disabled={sendState.status === 'sending' || !httpSmsConfigured}
                   title={!httpSmsConfigured ? 'Configure httpSMS in Settings first' : undefined}
@@ -648,9 +648,9 @@ export default function SendPage() {
                 </Button>
               </div>
 
-              <div className="mt-5 space-y-3 border-t border-white/10 pt-5">
+              <div className="mt-5 space-y-3 border-t border-[#e7eeea] pt-5">
                 {!session.complianceAcknowledged && (
-                  <label data-testid="send-compliance-label" className="flex cursor-pointer items-start gap-2 rounded-2xl border border-[#ffc53d]/30 bg-[#ffc53d]/5 p-4 text-sm">
+                  <label data-testid="send-compliance-label" className="flex cursor-pointer items-start gap-2 rounded-2xl border border-[#d4a017]/25 bg-[#f8f1d9] p-4 text-sm">
                     <Checkbox
                       data-testid="send-compliance-checkbox"
                       className="mt-0.5"
@@ -667,7 +667,7 @@ export default function SendPage() {
                 {showSkipInput && (
                   <div className="flex flex-col gap-2 sm:flex-row">
                     <Input data-testid="send-skip-reason-input" placeholder="Reason for skip (optional)" value={skipReason} onChange={(e) => setSkipReason(e.target.value)} className="sm:max-w-xs" />
-                    <Button data-testid="send-confirm-skip" variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void markCurrentPatientSkipped()}>
+                    <Button data-testid="send-confirm-skip" variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void markCurrentPatientSkipped()}>
                       Confirm Skip
                     </Button>
                     <Button variant="ghost" onClick={() => { setShowSkipInput(false); setSkipReason(''); }}>
@@ -685,7 +685,7 @@ export default function SendPage() {
             <h3>Queue</h3>
             <select
               data-testid="send-queue-filter"
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-foreground outline-none"
+              className="rounded-full border border-[#d9e5e0] bg-[#fcfcfa] px-3 py-2 text-xs text-foreground outline-none"
               value={queueFilter}
               onChange={(e) => setQueueFilter(e.target.value as QueueFilter)}
             >
@@ -705,12 +705,12 @@ export default function SendPage() {
                   key={recipient.id}
                   className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition-colors ${
                     isCurrent
-                      ? 'border-white/20 bg-white text-black'
+                      ? 'border-[#1f5d57] bg-[#1f5d57] text-white'
                       : recipient.sendStatus === 'sent'
-                        ? 'border-[#11ff99]/20 bg-[#11ff99]/5 text-foreground/80'
+                        ? 'border-[#cfe8db] bg-[#eaf5f1] text-foreground/80'
                         : recipient.sendStatus === 'skipped'
-                          ? 'border-[#ffc53d]/20 bg-[#ffc53d]/5 text-foreground/85'
-                          : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06]'
+                          ? 'border-[#ead9b3] bg-[#f8f1d9] text-foreground/85'
+                          : 'border-[#e7eeea] bg-[#fcfcfa] hover:bg-[#f4f8f6]'
                   }`}
                   onClick={() => void navigateToRecipient(realIdx)}
                 >
@@ -719,8 +719,8 @@ export default function SendPage() {
                       {recipient.firstName} {recipient.lastName}
                     </span>
                     <span className="text-xs">
-                      {recipient.sendStatus === 'sent' && <span className="text-[#11ff99]">✓ Sent</span>}
-                      {recipient.sendStatus === 'skipped' && <span className="text-[#ffc53d]">Skipped</span>}
+                      {recipient.sendStatus === 'sent' && <span className="text-[#1d7a43]">✓ Sent</span>}
+                      {recipient.sendStatus === 'skipped' && <span className="text-[#9b6829]">Skipped</span>}
                       {recipient.sendStatus === 'pending' && <span className="text-muted-foreground">Pending</span>}
                     </span>
                   </div>
@@ -730,17 +730,17 @@ export default function SendPage() {
                 </button>
               );
             })}
-            {filteredRecipients.length === 0 && <div className="rounded-2xl border border-dashed border-white/10 p-4 text-sm text-muted-foreground">No patients match this filter.</div>}
+            {filteredRecipients.length === 0 && <div className="rounded-2xl border border-dashed border-[#d9e5e0] p-4 text-sm text-muted-foreground">No patients match this filter.</div>}
           </div>
 
-          <div className="mt-4 space-y-2 border-t border-white/10 pt-4">
-            <Button data-testid="send-clear-queue" variant="outline" size="sm" className="w-full rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void clearCurrentQueue()}>
+          <div className="mt-4 space-y-2 border-t border-[#e7eeea] pt-4">
+            <Button data-testid="send-clear-queue" variant="outline" size="sm" className="w-full rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void clearCurrentQueue()}>
               <RotateCcw className="mr-1 h-3 w-3" /> Clear current queue
             </Button>
-            <Button data-testid="send-view-summary" variant="outline" size="sm" className="w-full rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => setShowSessionSummary(true)}>
+            <Button data-testid="send-view-summary" variant="outline" size="sm" className="w-full rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => setShowSessionSummary(true)}>
               View session summary
             </Button>
-            <Button data-testid="send-pause-save" variant="outline" size="sm" className="w-full rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => void pauseSession()}>
+            <Button data-testid="send-pause-save" variant="outline" size="sm" className="w-full rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => void pauseSession()}>
               <Pause className="mr-1 h-3 w-3" /> Pause & save
             </Button>
           </div>
@@ -754,14 +754,14 @@ export default function SendPage() {
             {showSendLog ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </button>
           {showSendLog && (
-            <div className="border-t border-white/10 px-4 py-4">
+            <div className="border-t border-[#e7eeea] px-4 py-4">
               <div className="space-y-2 text-sm">
                 {sendLog.map((entry) => (
-                  <div key={entry.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white/[0.03] px-4 py-3">
+                  <div key={entry.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f9fbfa] px-4 py-3">
                     <span className="text-muted-foreground">{entry.timestamp}</span>
                     <span>{entry.maskedPhone}</span>
                     <span className="text-muted-foreground">{entry.templateLabel}</span>
-                    <span className={entry.status === 'sent' ? 'text-[#11ff99]' : 'text-[#ff8aa0]'}>{entry.status === 'sent' ? 'Sent ✓' : 'Failed ✗'}</span>
+                    <span className={entry.status === 'sent' ? 'text-[#1d7a43]' : 'text-[#b42318]'}>{entry.status === 'sent' ? 'Sent ✓' : 'Failed ✗'}</span>
                   </div>
                 ))}
               </div>
@@ -770,37 +770,37 @@ export default function SendPage() {
         </div>
       )}
 
-      <div data-testid="send-bottom-bar" className="fixed inset-x-0 bottom-0 z-40 bg-[#1d4ed8] shadow-[0_-2px_8px_rgba(0,0,0,0.15)] backdrop-blur-xl">
+      <div data-testid="send-bottom-bar" className="fixed inset-x-0 bottom-0 z-40 border-t border-[#0b463d] bg-[#0b463d] shadow-[0_-10px_30px_rgba(11,70,61,0.22)] backdrop-blur-xl">
         <div className="section-shell flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
             <p className="truncate text-sm font-medium text-white">
               Patient {session.currentIndex + 1} of {totalCount} , {currentRecipient?.firstName} {currentRecipient?.lastName}
             </p>
-            <p className="text-xs text-[#bfdbfe]">Enter = sent, S = skip, Z = undo, ←/→ = move, N = copy number, M = copy message</p>
+            <p className="text-xs text-[#dbe7e3]">Enter = sent, S = skip, Z = undo, ←/→ = move, N = copy number, M = copy message</p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="outline" className="rounded-full border-white/20 bg-white/10 text-[#bfdbfe] hover:bg-white/20 hover:text-white" onClick={() => void goToPreviousRecipient()} disabled={session.currentIndex === 0}>
+            <Button variant="outline" className="rounded-full border-white/15 bg-white/10 text-[#dbe7e3] hover:bg-white/20 hover:text-white" onClick={() => void goToPreviousRecipient()} disabled={session.currentIndex === 0}>
               <ArrowLeft className="mr-1 h-4 w-4" /> Previous
             </Button>
             {!showSkipInput ? (
-              <Button data-testid="send-skip-button" variant="outline" className="rounded-full border-white/20 bg-white/10 text-[#bfdbfe] hover:bg-white/20 hover:text-white" onClick={() => setShowSkipInput(true)} disabled={!currentRecipient || currentRecipient.sendStatus !== 'pending'}>
+              <Button data-testid="send-skip-button" variant="outline" className="rounded-full border-white/15 bg-white/10 text-[#dbe7e3] hover:bg-white/20 hover:text-white" onClick={() => setShowSkipInput(true)} disabled={!currentRecipient || currentRecipient.sendStatus !== 'pending'}>
                 <SkipForward className="mr-1 h-4 w-4" /> Skip
               </Button>
             ) : (
-              <Button variant="outline" className="rounded-full border-white/20 bg-white/10 text-[#bfdbfe] hover:bg-white/20 hover:text-white" onClick={() => { setShowSkipInput(false); setSkipReason(''); }}>
+              <Button variant="outline" className="rounded-full border-white/15 bg-white/10 text-[#dbe7e3] hover:bg-white/20 hover:text-white" onClick={() => { setShowSkipInput(false); setSkipReason(''); }}>
                 <Undo2 className="mr-1 h-4 w-4" /> Keep Pending
               </Button>
             )}
             {lastAction && (
-              <Button variant="outline" className="rounded-full border-white/20 bg-white/10 text-[#bfdbfe] hover:bg-white/20 hover:text-white" onClick={() => void undoLastAction()}>
+              <Button variant="outline" className="rounded-full border-white/15 bg-white/10 text-[#dbe7e3] hover:bg-white/20 hover:text-white" onClick={() => void undoLastAction()}>
                 <Undo2 className="mr-1 h-4 w-4" /> Undo Last
               </Button>
             )}
-            <Button data-testid="send-mark-sent-next" className="rounded-full bg-white text-[#1d4ed8] hover:bg-white/90" onClick={() => void markCurrentPatientSent()} disabled={!session.complianceAcknowledged || !currentRecipient || currentRecipient.sendStatus !== 'pending'}>
+            <Button data-testid="send-mark-sent-next" className="rounded-full bg-[#f5e7bf] text-[#0b463d] hover:bg-[#efe0b1]" onClick={() => void markCurrentPatientSent()} disabled={!session.complianceAcknowledged || !currentRecipient || currentRecipient.sendStatus !== 'pending'}>
               <Check className="mr-1 h-4 w-4" /> Mark Sent & Next
             </Button>
-            <Button variant="outline" className="rounded-full border-white/20 bg-white/10 text-[#bfdbfe] hover:bg-white/20 hover:text-white" onClick={() => void goToNextRecipient()} disabled={session.currentIndex >= totalCount - 1}>
+            <Button variant="outline" className="rounded-full border-white/15 bg-white/10 text-[#dbe7e3] hover:bg-white/20 hover:text-white" onClick={() => void goToNextRecipient()} disabled={session.currentIndex >= totalCount - 1}>
               Next <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           </div>
@@ -808,13 +808,13 @@ export default function SendPage() {
       </div>
 
       {fallbackText && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="mx-4 w-full max-w-md space-y-4 rounded-3xl border border-white/10 bg-black p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(12,20,18,0.45)] backdrop-blur-sm">
+          <div className="mx-4 w-full max-w-md space-y-4 rounded-3xl border border-[#d9e5e0] bg-[#fcfcfa] p-6">
             <div className="flex items-center gap-2 text-sm font-medium">
               <AlertCircle className="h-4 w-4" /> Copy this text manually
             </div>
             <textarea
-              className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-sm font-mono text-foreground"
+              className="w-full rounded-2xl border border-[#d9e5e0] bg-[#f9fbfa] p-3 text-sm font-mono text-foreground"
               rows={4}
               value={fallbackText}
               readOnly

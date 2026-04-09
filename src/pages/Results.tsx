@@ -11,7 +11,7 @@ export default function ResultsPage() {
   if (!activeSession) {
     return (
       <div className="mx-auto max-w-2xl py-16 text-center">
-        <p className="frost-pill text-[#3b9eff]">No active results</p>
+        <p className="frost-pill">No active results</p>
         <h1 className="mt-4">No session results to display yet.</h1>
         <p className="mt-4 text-muted-foreground">Start from Upload to import a sheet and process a patient batch.</p>
         <Button className="mt-6 rounded-full" onClick={() => navigate('/upload')}>
@@ -54,7 +54,7 @@ export default function ResultsPage() {
   return (
     <div className="space-y-8">
       <section className="max-w-4xl space-y-4">
-        <p className="frost-pill text-[#11ff99]">Results</p>
+        <p className="frost-pill">Results</p>
         <h1>Track the finished batch and export exactly what changed.</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
           Review sent, skipped, and pending patients at a glance, then download an updated spreadsheet or CSV summary for your records.
@@ -71,8 +71,8 @@ export default function ResultsPage() {
             </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-4">
-            <Metric label="Sent" value={sentCount} tone="text-[#11ff99]" />
-            <Metric label="Skipped" value={skippedCount} tone="text-[#ffc53d]" />
+            <Metric label="Sent" value={sentCount} tone="text-[#1d7a43]" />
+            <Metric label="Skipped" value={skippedCount} tone="text-[#9b6829]" />
             <Metric label="Pending" value={pendingCount} tone="text-muted-foreground" />
             <Metric label="Complete" value={`${pct}%`} tone="text-foreground" />
           </div>
@@ -82,7 +82,7 @@ export default function ResultsPage() {
       <section className="table-shell">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/10 bg-white/[0.03] text-muted-foreground">
+            <tr className="border-b border-[#d9e5e0] bg-[#f4f8f6] text-muted-foreground">
               <th className="px-4 py-3 text-left font-medium">Row</th>
               <th className="px-4 py-3 text-left font-medium">Name</th>
               <th className="px-4 py-3 text-left font-medium">Mobile</th>
@@ -93,13 +93,13 @@ export default function ResultsPage() {
           </thead>
           <tbody>
             {session.recipients.map((recipient) => (
-              <tr data-testid="results-row" key={recipient.id} className="border-b border-white/10 last:border-0">
+              <tr data-testid="results-row" key={recipient.id} className="border-b border-[#eef3f0] last:border-0">
                 <td className="px-4 py-3 text-muted-foreground">{recipient.originalRowNumber}</td>
                 <td className="px-4 py-3">{recipient.firstName} {recipient.lastName}</td>
                 <td className="px-4 py-3 font-mono text-muted-foreground">{recipient.mobileDisplay}</td>
                 <td className="px-4 py-3">
-                  {recipient.sendStatus === 'sent' && <span className="frost-pill bg-[#11ff99]/10 text-[#11ff99]">Sent</span>}
-                  {recipient.sendStatus === 'skipped' && <span className="frost-pill bg-[#ffc53d]/10 text-[#ffc53d]">Skipped</span>}
+                  {recipient.sendStatus === 'sent' && <span className="frost-pill bg-[#eaf5f1] text-[#1d7a43]">Sent</span>}
+                  {recipient.sendStatus === 'skipped' && <span className="frost-pill bg-[#f8f1d9] text-[#9b6829]">Skipped</span>}
                   {recipient.sendStatus === 'pending' && <span className="frost-pill text-muted-foreground">Pending</span>}
                 </td>
                 <td className="px-4 py-3 text-xs text-muted-foreground">{recipient.sentAt ? new Date(recipient.sentAt).toLocaleTimeString('en-AU') : '—'}</td>
@@ -114,12 +114,12 @@ export default function ResultsPage() {
         <Button data-testid="results-download-spreadsheet" className="rounded-full" onClick={downloadSpreadsheet} disabled={!originalFileBuffer}>
           <Download className="mr-2 h-4 w-4" /> Download Updated Spreadsheet
         </Button>
-        <Button data-testid="results-download-csv" variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={downloadCSV}>
+        <Button data-testid="results-download-csv" variant="outline" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={downloadCSV}>
           <Download className="mr-2 h-4 w-4" /> Download CSV Summary
         </Button>
         <Button
           variant="outline"
-          className="rounded-full border-white/10 bg-white/5 hover:bg-white/10"
+          className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]"
           onClick={() => {
             useAppStore.getState().setActiveSession(null);
             navigate('/upload');
@@ -134,7 +134,7 @@ export default function ResultsPage() {
 
 function Metric({ label, value, tone }: { label: string; value: number | string; tone: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
+    <div className="rounded-2xl border border-[#e7eeea] bg-[#fcfcfa] p-4 text-center">
       <p className={`text-3xl font-semibold ${tone}`}>{value}</p>
       <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">{label}</p>
     </div>
