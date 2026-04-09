@@ -56,7 +56,7 @@ export default function ReviewPage() {
       <div className="flex flex-wrap gap-2">
         <Button variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => selectFirst(25)}>First 25</Button>
         <Button variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => selectFirst(50)}>First 50</Button>
-        <Button data-testid="review-select-all" variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => selectAllValid()}>All valid</Button>
+        <Button data-testid="review-select-all" variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-success" onClick={() => selectAllValid()}>All valid</Button>
         <Button variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => clearSelection()}>Clear</Button>
       </div>
 
