@@ -111,7 +111,7 @@ export default function UploadPage() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
             <p className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Upload and prepare</p>
-            <h1 className="mt-4 text-white">Patient List Messager</h1>
+            <h1 className="mt-4 text-white">Patient List Messenger</h1>
             <p className="mt-4 max-w-2xl text-lg text-[#dbe7e3]">
               Import the spreadsheet, and review each message before it goes out.
             </p>
@@ -122,7 +122,7 @@ export default function UploadPage() {
             </div>
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Burke Road</p>
-              <p className="font-display text-2xl text-white">Text Messager</p>
+              <p className="font-display text-2xl text-white">Text Messenger</p>
               <p className="mt-1 text-sm text-[#dbe7e3]">Patient SMS workflow</p>
             </div>
           </div>
