@@ -53,7 +53,7 @@ export default function ReviewPage() {
         <span className="text-sm text-muted-foreground">· Duplicates {recipients.filter(r => r.isDuplicate).length}</span>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 text-card-foreground">
         <Button variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => selectFirst(25)}>First 25</Button>
         <Button variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => selectFirst(50)}>First 50</Button>
         <Button data-testid="review-select-all" variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-success" onClick={() => selectAllValid()}>All valid</Button>
