@@ -50,72 +50,82 @@ export default function MessageBuilderPage() {
   if (selected.length === 0) return null;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-4">
-      <div>
-        <label className="mb-1 block text-sm font-medium">Session name</label>
-        <Input value={sessionName} onChange={e => setSessionName(e.target.value)} />
-      </div>
-
-      {savedTemplates.length > 0 && (
-        <div>
-          <label className="mb-1 block text-sm font-medium">Load template</label>
-          <select
-            className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm"
-            onChange={e => {
-              const tmpl = savedTemplates.find(t => t.id === e.target.value);
-              if (tmpl) setMessageTemplate(tmpl.body);
-            }}
-            defaultValue=""
-          >
-            <option value="" disabled>Choose a saved template…</option>
-            {savedTemplates.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
-          </select>
-        </div>
-      )}
-
-      <div>
-        <label className="mb-1 block text-sm font-medium">Message</label>
-        <Textarea
-          data-testid="message-template-textarea"
-          ref={textareaRef}
-          value={messageTemplate}
-          onChange={e => setMessageTemplate(e.target.value)}
-          rows={8}
-          className="font-mono text-sm"
-        />
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {['{firstName}', '{pharmacyName}', '{pharmacyPhone}', '{bookingLink}'].map(token => (
-          <Button key={token} variant="outline" size="sm" onClick={() => insertToken(token)}>
-            {token}
-          </Button>
-        ))}
-      </div>
-
-      <div className="flex items-center gap-4">
-        <p className={`text-sm font-medium ${segInfo.segments >= 3 ? 'text-destructive' : segInfo.segments >= 2 ? 'text-warning' : 'text-muted-foreground'}`}>
-          {segInfo.chars} chars · {segInfo.encoding} · {segInfo.segments} segment{segInfo.segments !== 1 ? 's' : ''} (worst case)
+    <div className="space-y-6">
+      <section className="max-w-4xl space-y-4">
+        <p className="frost-pill">Message builder</p>
+        <h1>Shape the message before it reaches patients.</h1>
+        <p className="max-w-2xl text-lg text-muted-foreground">
+          Tune the wording, keep the SMS length sensible, and save templates you will want to reuse later.
         </p>
+      </section>
+
+      <div className="frost-panel space-y-4 p-5">
+        <div>
+          <label className="mb-1 block text-sm font-medium">Session name</label>
+          <Input value={sessionName} onChange={e => setSessionName(e.target.value)} />
+        </div>
+
+        {savedTemplates.length > 0 && (
+          <div>
+            <label className="mb-1 block text-sm font-medium">Load template</label>
+            <select
+              className="w-full rounded-xl border border-[#d9e5e0] bg-[#fcfcfa] px-3 py-2 text-sm"
+              onChange={e => {
+                const tmpl = savedTemplates.find(t => t.id === e.target.value);
+                if (tmpl) setMessageTemplate(tmpl.body);
+              }}
+              defaultValue=""
+            >
+              <option value="" disabled>Choose a saved template…</option>
+              {savedTemplates.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+            </select>
+          </div>
+        )}
+
+        <div>
+          <label className="mb-1 block text-sm font-medium">Message</label>
+          <Textarea
+            data-testid="message-template-textarea"
+            ref={textareaRef}
+            value={messageTemplate}
+            onChange={e => setMessageTemplate(e.target.value)}
+            rows={8}
+            className="font-mono text-sm"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {['{firstName}', '{pharmacyName}', '{pharmacyPhone}', '{bookingLink}'].map(token => (
+            <Button key={token} variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => insertToken(token)}>
+              {token}
+            </Button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-4">
+          <p className={`text-sm font-medium ${segInfo.segments >= 3 ? 'text-[#b42318]' : segInfo.segments >= 2 ? 'text-[#9b6829]' : 'text-muted-foreground'}`}>
+            {segInfo.chars} chars · {segInfo.encoding} · {segInfo.segments} segment{segInfo.segments !== 1 ? 's' : ''} (worst case)
+          </p>
+        </div>
+
+        {segInfo.segments >= 3 && (
+          <p className="text-sm text-[#b42318]">Very long, {segInfo.segments} segments per patient. Consider shortening.</p>
+        )}
+        {segInfo.segments === 2 && (
+          <p className="text-sm text-[#9b6829]">Sends as 2 separate texts per patient.</p>
+        )}
+
+        <label className="flex cursor-pointer items-center gap-2 text-sm">
+          <Checkbox checked={appendOptOut} onCheckedChange={v => setAppendOptOut(!!v)} />
+          Append "{settings.defaultOptOutText}"
+        </label>
       </div>
 
-      {segInfo.segments >= 3 && (
-        <p className="text-sm text-destructive">Very long — {segInfo.segments} segments per patient. Consider shortening.</p>
-      )}
-      {segInfo.segments === 2 && (
-        <p className="text-sm text-warning">Sends as 2 separate texts per patient.</p>
-      )}
-
-      <label className="flex items-center gap-2 text-sm cursor-pointer">
-        <Checkbox checked={appendOptOut} onCheckedChange={v => setAppendOptOut(!!v)} />
-        Append "{settings.defaultOptOutText}"
-      </label>
-
-      <div className="rounded-2xl border border-border bg-card p-4">
+      <div className="frost-panel p-4">
         <p className="mb-3 text-sm font-medium text-muted-foreground">Live preview</p>
         <div className="space-y-3">
           {selected.slice(0, 3).map(r => (
-            <div key={r.id} data-testid="message-preview-card" className="rounded-xl border border-border p-3 text-sm">
+            <div key={r.id} data-testid="message-preview-card" className="rounded-xl border border-[#e7eeea] bg-[#fcfcfa] p-3 text-sm">
               <p className="mb-1 text-xs font-medium text-muted-foreground">{r.firstName} {r.lastName}</p>
               <p className="whitespace-pre-wrap">{renderMessage(fullMessage, r, settings)}</p>
             </div>
@@ -123,9 +133,9 @@ export default function MessageBuilderPage() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 rounded-xl border border-border p-3">
+      <div className="frost-panel flex items-center gap-2 p-3">
         <Input placeholder="Template name" value={templateName} onChange={e => setTemplateName(e.target.value)} className="flex-1" />
-        <Button variant="outline" size="sm" onClick={saveTemplate} disabled={!templateName.trim()}>
+        <Button variant="outline" size="sm" className="rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={saveTemplate} disabled={!templateName.trim()}>
           <Save className="mr-1 h-3 w-3" /> Save template
         </Button>
       </div>
