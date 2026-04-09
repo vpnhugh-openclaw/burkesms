@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,42 +6,42 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 94%;
+    --background: 40 33% 98%;
+    --foreground: 165 14% 14%;
 
-    --card: 0 0% 3%;
-    --card-foreground: 0 0% 94%;
+    --card: 0 0% 100%;
+    --card-foreground: 165 14% 14%;
 
-    --popover: 0 0% 3%;
-    --popover-foreground: 0 0% 94%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 165 14% 14%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 171 100% 16%;
+    --primary-foreground: 40 33% 98%;
 
-    --secondary: 210 22% 11%;
-    --secondary-foreground: 0 0% 94%;
+    --secondary: 154 23% 95%;
+    --secondary-foreground: 165 14% 14%;
 
-    --muted: 210 16% 8%;
-    --muted-foreground: 200 6% 64%;
+    --muted: 150 18% 96%;
+    --muted-foreground: 165 8% 42%;
 
-    --accent: 210 16% 10%;
-    --accent-foreground: 0 0% 94%;
+    --accent: 154 23% 95%;
+    --accent-foreground: 165 14% 14%;
 
-    --destructive: 349 100% 56%;
+    --destructive: 4 68% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 208 56% 92% / 0.19;
-    --input: 208 56% 92% / 0.19;
-    --ring: 208 100% 62%;
+    --border: 154 19% 86%;
+    --input: 154 19% 86%;
+    --ring: 171 100% 16%;
 
     --radius: 1rem;
 
-    --success: 147 100% 53%;
-    --success-foreground: 0 0% 0%;
-    --warning: 42 100% 62%;
-    --warning-foreground: 0 0% 0%;
-    --info: 209 100% 62%;
-    --info-foreground: 0 0% 0%;
+    --success: 136 61% 30%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 69% 42%;
+    --warning-foreground: 0 0% 100%;
+    --info: 186 77% 26%;
+    --info-foreground: 0 0% 100%;
   }
 
   * {
@@ -49,16 +49,16 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, sans-serif;
     background:
-      radial-gradient(circle at top, rgba(255, 128, 31, 0.12), transparent 28%),
-      radial-gradient(circle at 20% 20%, rgba(59, 158, 255, 0.1), transparent 26%),
-      #000000;
+      radial-gradient(circle at top right, rgba(15, 118, 110, 0.06), transparent 24%),
+      radial-gradient(circle at left top, rgba(204, 153, 0, 0.08), transparent 18%),
+      linear-gradient(180deg, #fcfcfa 0%, #f4f8f6 100%);
     min-height: 100vh;
   }
 
@@ -66,36 +66,38 @@
   h2,
   h3,
   .font-display {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Libre Baskerville', serif;
     letter-spacing: -0.03em;
+    color: hsl(var(--foreground));
   }
 
   h1 {
-    font-size: clamp(3.75rem, 9vw, 6rem);
-    line-height: 1;
-  }
-
-  h2 {
-    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    font-size: clamp(2.75rem, 7vw, 4.6rem);
     line-height: 1.05;
   }
 
+  h2 {
+    font-size: clamp(2rem, 5vw, 3.15rem);
+    line-height: 1.08;
+  }
+
   h3 {
-    font-size: clamp(1.35rem, 3vw, 1.9rem);
-    line-height: 1.15;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    line-height: 1.2;
   }
 }
 
 @layer components {
   .frost-panel {
-    @apply rounded-3xl border bg-card/70 backdrop-blur-xl;
-    box-shadow: 0 0 0 1px rgba(176, 199, 217, 0.145);
+    @apply rounded-[24px] border bg-card;
+    box-shadow: 0 18px 40px -28px rgba(31, 42, 40, 0.18);
   }
 
   .frost-pill {
-    @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium;
-    border-color: rgba(214, 235, 253, 0.19);
-    background: rgba(255, 255, 255, 0.04);
+    @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em];
+    border-color: rgba(31, 93, 87, 0.14);
+    background: rgba(234, 245, 241, 0.92);
+    color: #1f5d57;
   }
 
   .section-shell {
@@ -103,7 +105,11 @@
   }
 
   .table-shell {
-    @apply overflow-hidden rounded-3xl border bg-card/70 backdrop-blur-xl;
-    box-shadow: 0 0 0 1px rgba(176, 199, 217, 0.145);
+    @apply overflow-hidden rounded-[24px] border bg-card;
+    box-shadow: 0 18px 40px -28px rgba(31, 42, 40, 0.18);
+  }
+
+  .hero-wash {
+    background: linear-gradient(135deg, rgba(0, 77, 58, 0.96) 0%, rgba(31, 93, 87, 0.94) 56%, rgba(15, 118, 110, 0.9) 100%);
   }
 }

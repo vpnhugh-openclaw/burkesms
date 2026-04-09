@@ -84,7 +84,7 @@ export async function testConnection(
     apiKey: params.apiKey,
     from: params.from,
     to: params.from,
-    content: 'httpSMS test from Hugh\'s Pharmacy Text Messager',
+    content: 'httpSMS test from Burke Text Messager',
   });
 
   if (!result.success) {

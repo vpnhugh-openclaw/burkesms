@@ -71,7 +71,7 @@ export interface MessageTemplate {
 }
 
 export const DEFAULT_SETTINGS: AppSettings = {
-  pharmacyName: "Hugh's Pharmacy",
+  pharmacyName: 'Burke Road Compounding Pharmacy',
   pharmacyPhone: '',
   bookingLink: '',
   batchSoftCap: 50,

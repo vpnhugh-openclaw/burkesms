@@ -107,26 +107,38 @@ export default function UploadPage() {
 
   return (
     <div className="space-y-8">
-      <section className="space-y-4">
-        <div className="max-w-4xl">
-          <p className="frost-pill text-[#ffa057]">Upload and prepare</p>
-          <h1 className="mt-4">Load your patient list and move through each send with confidence.</h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Import the spreadsheet, review the patient list, and keep your workflow tidy with clear status tracking before you send.
-          </p>
+      <section className="hero-wash overflow-hidden rounded-[28px] border border-[#0b463d] px-6 py-8 text-white shadow-[0_30px_60px_-35px_rgba(11,70,61,0.55)] sm:px-8 sm:py-10">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Upload and prepare</p>
+            <h1 className="mt-4 text-white">Load your patient list and run outreach with calm, pharmacy-grade clarity.</h1>
+            <p className="mt-4 max-w-2xl text-lg text-[#dbe7e3]">
+              Import the spreadsheet, review the queue, and keep every patient touchpoint organised before messages go out.
+            </p>
+          </div>
+          <div className="flex items-center gap-4 self-start rounded-[24px] border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-4 border-[#d4a017] bg-[#fcfcfa]">
+              <img src="/burke-road-logo.jpg" alt="Burke Road Compounding Pharmacy logo" className="h-full w-full object-cover" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Burke Road</p>
+              <p className="font-display text-2xl text-white">Text Messager</p>
+              <p className="mt-1 text-sm text-[#dbe7e3]">Patient SMS workflow</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {showSetupBanner && (
-        <div className="frost-panel flex items-start justify-between gap-4 border border-[#60a5fa]/20 bg-[#1d4ed8]/10 p-4">
+        <div className="frost-panel flex items-start justify-between gap-4 border border-[#d9e5e0] bg-[#f4f8f6] p-4">
           <button type="button" className="min-w-0 text-left" onClick={() => setShowSetupGuide(true)}>
-            <p className="text-sm font-medium text-[#dbeafe]">💡 Want to send texts directly without copy-pasting?</p>
-            <p className="mt-1 text-sm text-[#bfdbfe]">Set up direct sending in 3 steps. Show me how →</p>
+            <p className="text-sm font-medium text-[#1f2a28]">Want to send texts directly without copy-pasting?</p>
+            <p className="mt-1 text-sm text-[#5e6b67]">Set up direct sending in 3 steps. Show me how →</p>
           </button>
           <button
             type="button"
             aria-label="Dismiss setup guide banner"
-            className="rounded-full p-1 text-[#bfdbfe] transition hover:bg-white/10 hover:text-white"
+            className="rounded-full p-1 text-[#5e6b67] transition hover:bg-white hover:text-[#1f2a28]"
             onClick={() => setSetupBannerDismissed(true)}
           >
             <X className="h-4 w-4" />
@@ -137,7 +149,7 @@ export default function UploadPage() {
       {persistedSession && (
         <div className="frost-panel flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <RotateCcw className="h-5 w-5 text-[#11ff99]" />
+            <RotateCcw className="h-5 w-5 text-[#1d7a43]" />
             <div>
               <p className="text-sm font-medium text-foreground">Unfinished session</p>
               <p className="text-sm text-muted-foreground">
@@ -154,7 +166,7 @@ export default function UploadPage() {
       {!parseResult ? (
         <div
           data-testid="upload-dropzone"
-          className={`frost-panel cursor-pointer px-6 py-16 text-center transition-colors ${dragging ? 'border-white/30 bg-white/10' : 'hover:border-white/20 hover:bg-white/[0.06]'}`}
+          className={`frost-panel cursor-pointer border-dashed px-6 py-16 text-center transition-colors ${dragging ? 'border-[#1f5d57] bg-[#eaf5f1]' : 'hover:border-[#1f5d57]/40 hover:bg-[#f4f8f6]'}`}
           onDragOver={(e) => {
             e.preventDefault();
             setDragging(true);
@@ -169,7 +181,7 @@ export default function UploadPage() {
             input.click();
           }}
         >
-          <Upload className="mx-auto mb-6 h-14 w-14 text-[#3b9eff]" />
+          <Upload className="mx-auto mb-6 h-14 w-14 text-[#1f5d57]" />
           <h2>Drop your patient spreadsheet here</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
             Blackshaws format, message in rows 1 to 2, headers in row 3, patients from row 4.
@@ -178,12 +190,12 @@ export default function UploadPage() {
       ) : (
         <div className="space-y-6">
           <div className="frost-panel flex flex-col gap-4 p-5 sm:flex-row sm:items-center">
-            <FileSpreadsheet className="h-10 w-10 text-[#3b9eff]" />
+            <FileSpreadsheet className="h-10 w-10 text-[#1f5d57]" />
             <div>
               <p className="text-lg font-medium text-foreground">{fileName}</p>
               <p className="text-sm text-muted-foreground">{parseResult.stats.total} patients found</p>
             </div>
-            <Button variant="outline" className="ml-auto rounded-full border-white/10 bg-white/5 hover:bg-white/10" onClick={() => useAppStore.getState().resetImport()}>
+            <Button variant="outline" className="ml-auto rounded-full border-[#d9e5e0] bg-[#fcfcfa] hover:bg-[#f4f8f6]" onClick={() => useAppStore.getState().resetImport()}>
               Upload different file
             </Button>
           </div>
@@ -199,13 +211,13 @@ export default function UploadPage() {
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">Message from spreadsheet</p>
             <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-foreground">{parseResult.template}</p>
             {!parseResult.template.includes('{firstName}') && (
-              <p className="mt-3 text-sm text-[#3b9eff]">No personalisation detected. You can add {'{firstName}'} on the next step.</p>
+              <p className="mt-3 text-sm text-[#0f766e]">No personalisation detected. You can add {'{firstName}'} on the next step.</p>
             )}
           </div>
 
           {parseResult.warnings.length > 0 && (
-            <div className="frost-panel border-[#ffc53d]/20 bg-[#ffc53d]/5 p-5">
-              <p className="text-sm font-medium text-[#ffc53d]">Warnings</p>
+            <div className="frost-panel border-[#d4a017]/20 bg-[#f8f1d9] p-5">
+              <p className="text-sm font-medium text-[#9b6829]">Warnings</p>
               <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
                 {parseResult.warnings.slice(0, 20).map((warning, index) => (
                   <li key={index}>{warning}</li>
@@ -218,7 +230,7 @@ export default function UploadPage() {
           <div className="table-shell">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/10 bg-white/[0.03] text-muted-foreground">
+                <tr className="border-b border-[#d9e5e0] bg-[#f4f8f6] text-muted-foreground">
                   <th className="px-4 py-3 text-left font-medium">Row</th>
                   <th className="px-4 py-3 text-left font-medium">First Name</th>
                   <th className="px-4 py-3 text-left font-medium">Last Name</th>
@@ -228,7 +240,7 @@ export default function UploadPage() {
               </thead>
               <tbody>
                 {parseResult.recipients.slice(0, 10).map((recipient) => (
-                  <tr key={recipient.id} data-testid="upload-patient-row" className="border-b border-white/10 last:border-0">
+                  <tr key={recipient.id} data-testid="upload-patient-row" className="border-b border-[#eef3f0] last:border-0">
                     <td className="px-4 py-3 text-muted-foreground">{recipient.originalRowNumber}</td>
                     <td className="px-4 py-3">{recipient.firstName}</td>
                     <td className="px-4 py-3">{recipient.lastName}</td>
@@ -251,7 +263,7 @@ export default function UploadPage() {
       )}
 
       {error && (
-        <div className="frost-panel border-[#ff2047]/30 bg-[#ff2047]/5 p-4 text-sm text-[#ff8aa0]">
+        <div className="frost-panel border-[#b42318]/20 bg-[#fff1f0] p-4 text-sm text-[#b42318]">
           {error}
         </div>
       )}
@@ -271,7 +283,7 @@ export default function UploadPage() {
 function StatChip({ icon: Icon, iconClass, label, value }: { icon: typeof CheckCircle; iconClass: string; label: string; value: number }) {
   return (
     <div className="frost-panel flex items-center gap-3 p-4">
-      <div className="rounded-full border border-white/10 bg-white/[0.04] p-2">
+      <div className="rounded-full border border-[#d9e5e0] bg-[#f4f8f6] p-2">
         <Icon className={`h-4 w-4 ${iconClass}`} />
       </div>
       <div>
@@ -284,7 +296,7 @@ function StatChip({ icon: Icon, iconClass, label, value }: { icon: typeof CheckC
 
 function StatusChip({ recipient }: { recipient: ImportedRecipient }) {
   if (recipient.isAlreadyTexted) return <span className="frost-pill text-muted-foreground">Already Texted</span>;
-  if (!recipient.isValidMobile) return <span className="frost-pill bg-[#ff2047]/10 text-[#ff8aa0]">Invalid</span>;
-  if (recipient.isDuplicate) return <span className="frost-pill bg-[#ffc53d]/10 text-[#ffc53d]">Duplicate</span>;
-  return <span className="frost-pill bg-[#11ff99]/10 text-[#11ff99]">Valid</span>;
+  if (!recipient.isValidMobile) return <span className="frost-pill bg-[#fff1f0] text-[#b42318]">Invalid</span>;
+  if (recipient.isDuplicate) return <span className="frost-pill bg-[#f8f1d9] text-[#9b6829]">Duplicate</span>;
+  return <span className="frost-pill bg-[#eaf5f1] text-[#1d7a43]">Valid</span>;
 }

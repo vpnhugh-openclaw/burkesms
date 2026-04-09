@@ -40,7 +40,7 @@ describe('httpsms service', () => {
 
     await expect(sendSMS({ apiKey: 'bad', from: '+61412345678', to: '+61400000000', content: 'Hello' })).resolves.toEqual({
       success: false,
-      error: 'Invalid API key — check Settings',
+      error: 'Invalid API key. Paste the account API key from httpsms.com/settings, not a phone API key.',
     });
   });
 
