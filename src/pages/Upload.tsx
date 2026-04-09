@@ -113,7 +113,12 @@ export default function UploadPage() {
             <p className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Upload and prepare</p>
             <h1 className="mt-4 text-white">Patient List Messenger</h1>
             <p className="mt-4 max-w-2xl text-lg text-[#dbe7e3]">
-              ... keep existing code
+              Import the spreadsheet, and review each message before it goes out.
+            </p>
+          </div>
+          <div className="flex items-center gap-4 self-start rounded-[24px] border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-4 border-[#d4a017] bg-[#fcfcfa]">
+              <img src="/burke-road-logo.jpg" alt="Burke Road Compounding Pharmacy logo" className="h-full w-full object-cover" />
             </div>
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#f5e7bf]">Burke Road</p>
